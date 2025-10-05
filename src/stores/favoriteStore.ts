@@ -12,7 +12,6 @@ export class FavoriteStore {
 
   constructor() {
     const valueFromStorage = getString(FAVORITE_KEY);
-    console.log('valueFromStorage', valueFromStorage);
     if (valueFromStorage) {
       this.favoriteEvents = convertStringToFavoriteItemArray(valueFromStorage);
     }
@@ -20,12 +19,14 @@ export class FavoriteStore {
   }
 
   toggleFavorite(id: string, source: EventSource) {
-    if (
-      this.favoriteEvents.find(item => item.id === id && item.source === source)
-    ) {
-      this.favoriteEvents = this.favoriteEvents.filter(
-        item => item.id !== id && item.source !== source,
-      );
+    const itemIndex = this.favoriteEvents.findIndex(
+      item => item.id === id && item.source === source,
+    );
+    if (itemIndex !== -1) {
+      this.favoriteEvents = [
+        ...this.favoriteEvents.slice(0, itemIndex),
+        ...this.favoriteEvents.slice(itemIndex + 1),
+      ];
     } else {
       this.favoriteEvents.push({id, source});
     }
