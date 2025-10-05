@@ -1,5 +1,6 @@
 import {
   ActivityIndicator,
+  RefreshControl,
   SectionList,
   SectionListRenderItem,
   Text,
@@ -39,6 +40,10 @@ export const EventList = observer(({onViewEventDetails}: EventListProps) => {
     <Text className="my-2 text-lg font-bold color-gray-600">{category}</Text>
   );
 
+  const refetch = () => {
+    eventStore.fetchEvents();
+  };
+
   if (eventStore.loading) {
     return <ActivityIndicator className="my-2" />;
   }
@@ -68,6 +73,9 @@ export const EventList = observer(({onViewEventDetails}: EventListProps) => {
       ListHeaderComponent={renderHeader}
       stickySectionHeadersEnabled={false}
       contentContainerClassName="p-4 bg-white"
+      refreshControl={
+        <RefreshControl refreshing={eventStore.loading} onRefresh={refetch} />
+      }
     />
   );
 });
