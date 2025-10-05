@@ -5,6 +5,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import HomeScreen from './src/screens/HomeScreen';
 
+import './global.css';
+
 // Define the type for our stack navigator
 type RootStackParamList = {
   Home: undefined;
