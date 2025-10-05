@@ -20,6 +20,7 @@ export const yelpResponseMapper = (response: YelpResponse): Event[] => {
     url: event.event_site_url,
     image: event.image_url,
     category: event.category,
+    estimatedCost: event.cost,
   }));
 };
 
@@ -51,6 +52,11 @@ export const tickermasterResponseMapper = (
       url: event.url,
       image: event.images?.[0]?.url ?? '',
       category,
+      priceRanges:
+        event.priceRanges?.map(item => ({
+          min: item.min,
+          max: item.max,
+        })) ?? [],
     };
   });
 };
@@ -82,6 +88,7 @@ export const foursquareResponseMapper = (
       url: event.venue_url,
       image,
       category,
+      price: event.price,
     };
   });
 };

@@ -4,13 +4,10 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import HomeScreen from './src/screens/HomeScreen';
+import {RootStackParamList} from './src/types/navigation';
+import DetailsScreen from './src/screens/DetailsScreen';
 
 import './global.css';
-
-// Define the type for our stack navigator
-type RootStackParamList = {
-  Home: undefined;
-};
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -28,6 +25,13 @@ const App = (): React.JSX.Element => {
               headerTitleStyle: {
                 fontWeight: 'bold',
               },
+            }}
+          />
+          <Stack.Screen
+            name="Details"
+            component={DetailsScreen}
+            options={{
+              title: 'Event details',
             }}
           />
         </Stack.Navigator>

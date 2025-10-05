@@ -188,7 +188,6 @@ export enum EventSource {
 }
 
 export type Event = {
-  source: EventSource;
   id: string;
   name: string;
   description: string;
@@ -198,4 +197,20 @@ export type Event = {
   url: string;
   image: string;
   category: string;
-};
+} & (
+  | {
+      source: EventSource.FOURSQUARE;
+      price: number;
+    }
+  | {
+      source: EventSource.TICKETMASTER;
+      priceRanges: {
+        min: number;
+        max: number;
+      }[];
+    }
+  | {
+      source: EventSource.YELP;
+      estimatedCost: string;
+    }
+);

@@ -1,12 +1,14 @@
 import {makeAutoObservable} from 'mobx';
 
-import {Event} from '../types/event';
+import {Event, EventSource} from '../types/event';
 import {getEvents} from '../services/apiService';
 
 export class EventStore {
   events: Event[] = [];
   loading: boolean = false;
   error: string | null = null;
+  selectedEvent: Event | null = null;
+  selectedEventError: string | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -41,6 +43,20 @@ export class EventStore {
       },
       {} as Record<string, Event[]>,
     );
+  }
+
+  getSelectedEvent(id: string, source: EventSource) {
+    this.selectedEvent =
+      this.events.find(event => event.id === id && event.source === source) ??
+      null;
+    if (!this.selectedEvent) {
+      this.selectedEventError = 'Event not found';
+    }
+  }
+
+  clearSelectedEvent() {
+    this.selectedEvent = null;
+    this.selectedEventError = null;
   }
 }
 
