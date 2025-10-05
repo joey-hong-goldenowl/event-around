@@ -4,6 +4,7 @@ import {useState} from 'react';
 import {formatDateTime} from '../../utils/date';
 
 import {EventItemProps} from './type';
+import {FavoriteButton} from '../FavoriteButton';
 
 export const EventItem = ({data, onViewDetails}: EventItemProps) => {
   const [imageError, setImageError] = useState<boolean>(false);
@@ -45,11 +46,14 @@ export const EventItem = ({data, onViewDetails}: EventItemProps) => {
           <Text className="text-sm" numberOfLines={2}>
             {data.description}
           </Text>
-          <TouchableOpacity
-            className="self-start rounded-md bg-green-600 p-2"
-            onPress={onPressViewDetails}>
-            <Text className="text-sm color-white">View Details</Text>
-          </TouchableOpacity>
+          <View className="flex-row gap-1">
+            <TouchableOpacity
+              className="self-start rounded-md bg-green-600 p-2"
+              onPress={onPressViewDetails}>
+              <Text className="text-sm color-white">View Details</Text>
+            </TouchableOpacity>
+            <FavoriteButton eventId={data.id} eventSource={data.source} />
+          </View>
         </View>
       </View>
     </View>
