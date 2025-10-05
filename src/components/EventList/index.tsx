@@ -1,31 +1,23 @@
-import {FlatList, ListRenderItem, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  SectionList,
+  SectionListRenderItem,
+  Text,
+  View,
+} from 'react-native';
+import {observer} from 'mobx-react-lite';
 
 import {EventItem} from '../EventItem';
 
-import {Event, EventSource} from '../../types/event';
+import {Event} from '../../types/event';
+import {eventStore} from '../../stores/eventStore';
 
-import {EventListProps} from './type';
+import {EventListProps, EventListSection} from './type';
 
-const TEST_DATA = [
-  {
-    source: EventSource.YELP,
-    id: '1',
-    name: 'Test event',
-    description:
-      "Join us for the opening night of Melbourne's premier jazz festival featuring local and international artists.",
-    location: '123 Collins Street, Melbourne VIC 3000',
-    startTime: '2024-02-15T19:30:00+00:00',
-    endTime: '2024-02-15T23:00:00+00:00',
-    url: 'https://example.com/jazz-festival',
-    image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400',
-    category: 'Music',
-  },
-];
-
-export const EventList = ({onViewEventDetails}: EventListProps) => {
-  const renderItem: ListRenderItem<Event> = ({item}) => (
-    <EventItem data={item} onViewDetails={onViewEventDetails} />
-  );
+export const EventList = observer(({onViewEventDetails}: EventListProps) => {
+  const renderItem: SectionListRenderItem<Event, EventListSection> = ({
+    item,
+  }) => <EventItem data={item} onViewDetails={onViewEventDetails} />;
 
   const renderHeader = () => (
     <Text className="mb-2 text-xl font-bold color-gray-950">
@@ -39,14 +31,43 @@ export const EventList = ({onViewEventDetails}: EventListProps) => {
     <Text className="text-md text-center color-gray-500">No events found</Text>
   );
 
+  const renderSectionHeader = ({
+    section: {category},
+  }: {
+    section: EventListSection;
+  }) => (
+    <Text className="my-2 text-lg font-bold color-gray-600">{category}</Text>
+  );
+
+  if (eventStore.loading) {
+    return <ActivityIndicator className="my-2" />;
+  }
+
+  if (eventStore.error) {
+    return (
+      <Text className="text-md mt-2 text-center font-semibold color-red-500">
+        {eventStore.error}
+      </Text>
+    );
+  }
+
   return (
-    <FlatList
-      data={TEST_DATA}
+    <SectionList
+      sections={
+        Object.entries(eventStore.eventsByCategory).map(
+          ([category, events]) => ({
+            category,
+            data: events,
+          }),
+        ) as EventListSection[]
+      }
       renderItem={renderItem}
       ListEmptyComponent={renderEmpty}
       ItemSeparatorComponent={renderSeparator}
+      renderSectionHeader={renderSectionHeader}
       ListHeaderComponent={renderHeader}
+      stickySectionHeadersEnabled={false}
       contentContainerClassName="p-4 bg-white"
     />
   );
-};
+});
