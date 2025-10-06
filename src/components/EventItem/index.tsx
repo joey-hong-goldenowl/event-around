@@ -49,6 +49,9 @@ export const EventItem = ({data, onViewDetails}: EventItemProps) => {
           <View className="flex-row gap-1">
             <TouchableOpacity
               className="self-start rounded-md bg-green-600 p-2"
+              accessible
+              accessibilityLabel="View event details"
+              accessibilityRole="button"
               onPress={onPressViewDetails}>
               <Text className="text-sm color-white">View Details</Text>
             </TouchableOpacity>

@@ -16,7 +16,10 @@ export const FavoriteButton = observer(
     return (
       <TouchableOpacity
         className="self-start rounded-md bg-yellow-500 p-2"
-        onPress={onPressFavorite}>
+        onPress={onPressFavorite}
+        accessible
+        accessibilityLabel="Toggle favorite event"
+        accessibilityRole="button">
         <Text className="text-sm color-white">
           {isFavorited ? 'Unfavorite' : 'Favorite'}
         </Text>
