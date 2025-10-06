@@ -8,12 +8,19 @@ import {
 } from 'react-native';
 import {observer} from 'mobx-react-lite';
 
-import {EventItem} from '../EventItem';
+import {Event} from '../types/event';
+import {eventStore} from '../stores/eventStore';
 
-import {Event} from '../../types/event';
-import {eventStore} from '../../stores/eventStore';
+import {EventItem} from './EventItem';
 
-import {EventListProps, EventListSection} from './type';
+interface EventListProps {
+  onViewEventDetails: (event: Event) => void;
+}
+
+type EventListSection = {
+  category: string;
+  data: Event[];
+};
 
 export const EventList = observer(({onViewEventDetails}: EventListProps) => {
   const renderItem: SectionListRenderItem<Event, EventListSection> = ({

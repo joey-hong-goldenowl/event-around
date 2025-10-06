@@ -1,10 +1,15 @@
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {useState} from 'react';
 
-import {formatDateTime} from '../../utils/date';
+import {formatDateTime} from '../utils/date';
+import {Event} from '../types/event';
 
-import {EventItemProps} from './type';
-import {FavoriteButton} from '../FavoriteButton';
+import {FavoriteButton} from './FavoriteButton';
+
+interface EventItemProps {
+  data: Event;
+  onViewDetails: (data: Event) => void;
+}
 
 export const EventItem = ({data, onViewDetails}: EventItemProps) => {
   const [imageError, setImageError] = useState<boolean>(false);

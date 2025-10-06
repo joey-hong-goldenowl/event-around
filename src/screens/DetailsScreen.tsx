@@ -14,7 +14,7 @@ import {eventStore} from '../stores/eventStore';
 import {EventSource} from '../types/event';
 import {formatPrice} from '../utils/number';
 import {formatDateTime} from '../utils/date';
-import {AutoHeightImage} from '../components/AutoHeightImage';
+import {DynamicHeightImage} from '../components/DynamicHeightImage';
 
 const DetailsScreen = observer(() => {
   const route = useRoute<RouteProp<RootStackParamList, 'Details'>>();
@@ -36,27 +36,29 @@ const DetailsScreen = observer(() => {
     switch (eventStore.selectedEvent!.source) {
       case EventSource.YELP:
         return (
-          <Text className="text-md mt-1">
-            Estimated cost:
-            <Text className="text-md font-semibold">{` ${eventStore.selectedEvent!.estimatedCost}`}</Text>
-          </Text>
+          <View className="mt-1 flex-row">
+            <Text className="text-md flex-1">Estimated cost:</Text>
+            <Text className="text-md flex-1 text-right font-semibold">{` ${eventStore.selectedEvent!.estimatedCost}`}</Text>
+          </View>
         );
       case EventSource.FOURSQUARE:
         return (
-          <Text className="text-md mt-1">
-            Price:
-            <Text className="text-md font-semibold">{` $${formatPrice(eventStore.selectedEvent!.price)}`}</Text>
-          </Text>
+          <View className="mt-1 flex-row">
+            <Text className="text-md flex-1">Price:</Text>
+            <Text className="text-md flex-1 text-right font-semibold">{` $${formatPrice(eventStore.selectedEvent!.price)}`}</Text>
+          </View>
         );
       case EventSource.TICKETMASTER:
         return (
-          <View className="mt-1 gap-1">
-            <Text className="text-md">Price ranges:</Text>
-            {eventStore.selectedEvent!.priceRanges.map((range, i) => (
-              <View key={i}>
-                <Text className="text-md font-semibold">{`$${formatPrice(range.min)} - $${formatPrice(range.max)}`}</Text>
-              </View>
-            ))}
+          <View className="mt-1 flex-row gap-1">
+            <Text className="text-md flex-1">Price ranges:</Text>
+            <View className="flex-1">
+              {eventStore.selectedEvent!.priceRanges.map((range, i) => (
+                <Text
+                  key={i}
+                  className="text-md text-right font-semibold">{`$${formatPrice(range.min)} - $${formatPrice(range.max)}`}</Text>
+              ))}
+            </View>
           </View>
         );
       default:
@@ -79,7 +81,6 @@ const DetailsScreen = observer(() => {
   return (
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView contentContainerClassName="p-4">
-        <AutoHeightImage uri={eventStore.selectedEvent!.image} />
         <View className="mb-4 mt-2 gap-2">
           <Text className="text-center text-2xl font-bold">
             {eventStore.selectedEvent!.name}
@@ -90,26 +91,29 @@ const DetailsScreen = observer(() => {
             </Text>
           )}
         </View>
-        <Text className="text-md mt-1">
-          Start date:
-          <Text className="text-md font-semibold">{` ${formatDateTime(eventStore.selectedEvent!.startTime)}`}</Text>
-        </Text>
+        <DynamicHeightImage uri={eventStore.selectedEvent!.image} />
+        <View className="mt-4 flex-row">
+          <Text className="text-md flex-1">Start date:</Text>
+          <Text className="text-md flex-1 text-right font-semibold">{` ${formatDateTime(eventStore.selectedEvent!.startTime)}`}</Text>
+        </View>
         {!!eventStore.selectedEvent!.endTime && (
-          <Text className="text-md mt-1">
-            End date:
-            <Text className="text-md font-semibold">{` ${formatDateTime(eventStore.selectedEvent!.endTime)}`}</Text>
-          </Text>
+          <View className="mt-1 flex-row">
+            <Text className="text-md flex-1">End date:</Text>
+            <Text className="text-md flex-1 text-right font-semibold">{` ${formatDateTime(eventStore.selectedEvent!.endTime)}`}</Text>
+          </View>
         )}
-        <Text className=" text-md mt-1">
-          Location:
-          <Text className="text-md font-semibold">{` ${eventStore.selectedEvent!.location}`}</Text>
-        </Text>
+        <View className="mt-1 flex-row">
+          <Text className="text-md flex-1">Location:</Text>
+          <Text className="text-md flex-1 text-right font-semibold">{` ${eventStore.selectedEvent!.location}`}</Text>
+        </View>
         {renderPriceSection()}
 
-        <Text className="text-md mt-4">Description:</Text>
-        <Text className="mt-1 text-lg">
-          {eventStore.selectedEvent!.description}
-        </Text>
+        <View className="mt-1 flex-row">
+          <Text className="text-md flex-1">Description:</Text>
+          <Text className="text-md flex-1 text-right font-semibold">
+            {eventStore.selectedEvent!.description}
+          </Text>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

@@ -1,9 +1,18 @@
-import {Image, LayoutChangeEvent, View} from 'react-native';
+import {
+  Image,
+  ImageStyle,
+  LayoutChangeEvent,
+  StyleProp,
+  View,
+} from 'react-native';
 import React, {useState} from 'react';
 
-import {AutoHeightImageProps} from './type';
+interface AutoHeightImageProps {
+  uri: string;
+  style?: StyleProp<ImageStyle>;
+}
 
-export const AutoHeightImage = ({uri, style}: AutoHeightImageProps) => {
+export const DynamicHeightImage = ({uri, style}: AutoHeightImageProps) => {
   const [parentWidth, setParentWidth] = useState<number>(0);
   const [height, setHeight] = useState<number>(0);
 

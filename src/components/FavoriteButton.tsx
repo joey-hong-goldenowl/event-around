@@ -2,8 +2,13 @@ import {Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {observer} from 'mobx-react-lite';
 
-import {FavoriteButtonProps} from './type';
-import {favoriteStore} from '../../stores/favoriteStore';
+import {favoriteStore} from '../stores/favoriteStore';
+import {EventSource} from '../types/event';
+
+interface FavoriteButtonProps {
+  eventId: string;
+  eventSource: EventSource;
+}
 
 export const FavoriteButton = observer(
   ({eventId, eventSource}: FavoriteButtonProps) => {
