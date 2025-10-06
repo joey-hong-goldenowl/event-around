@@ -201,8 +201,8 @@ describe('EventStore', () => {
       Nightlife: [mockEvents[8]],
     });
     expect(Object.keys(grouped)).toHaveLength(8);
-    expect(grouped['Music']).toHaveLength(2);
-    expect(grouped['Market']).toHaveLength(1);
+    expect(grouped.Music).toHaveLength(2);
+    expect(grouped.Market).toHaveLength(1);
   });
 
   test('should select event by id and source', () => {

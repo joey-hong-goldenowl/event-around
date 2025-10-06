@@ -63,9 +63,8 @@ describe('apiService Mappers', () => {
           startTime: '2024-02-15T19:30:00+00:00',
           endTime: '2024-02-15T23:00:00+00:00',
           url: 'https://example.com/jazz-festival',
-          images: [
+          image:
             'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400',
-          ],
           category: 'Music',
           estimatedCost: '$$',
         },
@@ -181,9 +180,8 @@ describe('apiService Mappers', () => {
           startTime: '2024-03-20T19:00:00Z',
           endTime: '',
           url: 'https://example.com/taylor-swift-eras-tour',
-          images: [
+          image:
             'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=400',
-          ],
           category: 'Music',
           priceRanges: [{min: 89.9, max: 399.9}],
         },
@@ -274,9 +272,8 @@ describe('apiService Mappers', () => {
           startTime: '2024-02-25T09:00:00+10:00',
           endTime: '2024-02-25T16:00:00+10:00',
           url: 'https://example.com/weekend-market',
-          images: [
+          image:
             'https://fastly.4sqi.net/img/general/22215264_xnY8G47f5lzpgAJEMPkKcBnHRoKfgGQjV_W1xNXULmU.jpg',
-          ],
           category: 'Market',
           price: 1,
         },

@@ -32,9 +32,8 @@ describe('apiService', () => {
         startTime: '2024-02-25T09:00:00+10:00',
         endTime: '2024-02-25T16:00:00+10:00',
         url: 'https://example.com/weekend-market',
-        images: [
+        image:
           'https://fastly.4sqi.net/img/general/22215264_xnY8G47f5lzpgAJEMPkKcBnHRoKfgGQjV_W1xNXULmU.jpg',
-        ],
         category: 'Market',
         price: 1,
       },
@@ -48,9 +47,8 @@ describe('apiService', () => {
         startTime: '2024-03-05T10:00:00+11:00',
         endTime: '2024-03-25T17:00:00+11:00',
         url: 'https://example.com/art-exhibition',
-        images: [
+        images:
           'https://fastly.4sqi.net/img/general/398645_A-7R_30DfqWhpJw3GAdSRznRxN-eG25PafchAQC9Eq0.jpg',
-        ],
         category: 'Arts & Culture',
         price: 2,
       },
@@ -64,9 +62,8 @@ describe('apiService', () => {
         startTime: '2024-02-18T14:00:00+11:00',
         endTime: '2024-02-18T17:00:00+11:00',
         url: 'https://example.com/wine-masterclass',
-        images: [
+        image:
           'https://fastly.4sqi.net/img/general/212614_omt8rL-S2-Px8AxW9ekGGGs8WsGSARYWeBo3-yS_3zU.jpg',
-        ],
         category: 'Wine Tasting',
         price: 3,
       },
@@ -83,9 +80,8 @@ describe('apiService', () => {
         startTime: '2024-03-20T19:00:00Z',
         endTime: '',
         url: 'https://example.com/taylor-swift-eras-tour',
-        images: [
+        image:
           'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=400',
-        ],
         category: 'Music',
         priceRanges: [{min: 89.9, max: 399.9}],
       },
@@ -99,9 +95,8 @@ describe('apiService', () => {
         startTime: '2024-01-14T10:00:00Z',
         endTime: '2024-01-28T22:00:00Z',
         url: 'https://example.com/australian-open',
-        images: [
+        image:
           'https://images.unsplash.com/photo-1531315630201-bb15abeb1653?w=400',
-        ],
         category: 'Sports',
         priceRanges: [{min: 59.0, max: 899.0}],
       },
@@ -116,9 +111,8 @@ describe('apiService', () => {
         startTime: '2024-02-27T19:30:00Z',
         endTime: '',
         url: 'https://example.com/hamilton-musical',
-        images: [
+        image:
           'https://images.unsplash.com/photo-1503095396549-807759245b35?w=400',
-        ],
         category: 'Arts & Theatre',
         priceRanges: [{min: 70.0, max: 250.0}],
       },
@@ -135,9 +129,8 @@ describe('apiService', () => {
         startTime: '2024-02-15T19:30:00+00:00',
         endTime: '2024-02-15T23:00:00+00:00',
         url: 'https://example.com/jazz-festival',
-        images: [
+        image:
           'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400',
-        ],
         category: 'Music',
         estimatedCost: '$$',
       },
@@ -151,9 +144,8 @@ describe('apiService', () => {
         startTime: '2024-02-18T12:00:00+00:00',
         endTime: '2024-02-18T18:00:00+00:00',
         url: 'https://example.com/food-wine-fest',
-        images: [
+        image:
           'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400',
-        ],
         category: 'Food & Drink',
         estimatedCost: '$$$',
       },
@@ -167,9 +159,8 @@ describe('apiService', () => {
         startTime: '2024-02-20T20:00:00+00:00',
         endTime: '2024-02-20T22:30:00+00:00',
         url: 'https://example.com/comedy-night',
-        images: [
+        image:
           'https://images.unsplash.com/photo-1527224450515-e8ca739ccc5a?w=400',
-        ],
         category: 'Nightlife',
         estimatedCost: '$',
       },

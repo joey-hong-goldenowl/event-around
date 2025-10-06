@@ -3,23 +3,22 @@ import {MMKV} from 'react-native-mmkv';
 import {getString, setString} from '../../src/services/storageService';
 
 jest.mock('react-native-mmkv', () => {
+  const mockStorage = {
+    set: jest.fn(),
+    getString: jest.fn(),
+  };
+
   return {
-    MMKV: jest.fn().mockImplementation(() => {
-      const store = new Map();
-      return {
-        set: jest.fn((key: string, value: string) => store.set(key, value)),
-        getString: jest.fn((key: string) => store.get(key) ?? undefined),
-      };
-    }),
+    MMKV: jest.fn(() => mockStorage),
   };
 });
 
 describe('Storage Functions', () => {
-  let mockStorage: jest.Mocked<MMKV>;
+  let mockStorage: any;
 
   beforeEach(() => {
     jest.clearAllMocks();
-    mockStorage = new MMKV() as jest.Mocked<MMKV>;
+    mockStorage = new MMKV();
   });
 
   describe('setString', () => {
